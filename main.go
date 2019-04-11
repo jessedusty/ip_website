@@ -43,8 +43,14 @@ func GetIP(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w,"Current IP is %s\nLast update time is %s\n", currentIP, lastUpdateTime.String())
 }
 
+func GetIP2(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprint(w, currentIP)
+}
+
+
 func main() {
 	http.HandleFunc("/set", SetIP)
+	http.HandleFunc("/get", GetIP2)
 	http.HandleFunc("/", GetIP)
 	err := http.ListenAndServe("0.0.0.0:80", nil)
 	if err != nil {
